@@ -1,7 +1,7 @@
 
 
 # **QuickEats: A Foodie Solution**
-![Foodie Solution](food_image.png)
+![Foodie Solution](food101image3.png)
 
 This project is a part of the ADS-599 course in the Applied Data Science Program at the University of San Diego.
 
