@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<!--<link href="../static/styles.css" rel="stylesheet">-->
+<head>
+    <meta charset="UTF-8">
+    <title>QuickEats</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+<h1 class="title_container">QuickEats: Food Classifier</h1>
+
+<h2>Details For Use:</h2>
+<p class="description_container">The application analyzes the sentiment of each review, providing insights into its positive or negative nature. Users can gain valuable insights about the reviewed media product by understanding the overall sentiment associated with the reviews. 
+</p>
+
+
+<form id="uploadForm" method="post" enctype="multipart/form-data">
+    <div class="input-row">
+        <label class="upload_file" for="img">Upload Food Image</label>
+        <input type="file" id="img" onchange="loadFile(event)"  name="file" accept="image/*" hidden>
+    </div>
+
+    <div class="submit-button">
+        <button type="submit">Classify</button>
+    </div>
+</form>
+
+<div id="predictionContainer" class="classify_container">
+</div>
+<div class="img_container">
+    <p><img id="output" width="400" /></p>
+</div>
+
+
+
+
+<script>
+    // Load Image
+    var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+
+    document.getElementById("uploadForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const form = event.target;
+        const fileInput = form.elements.file;
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        // AJAX request to the "/classify" endpoint
+        fetch("/classify", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the prediction results in the predictionContainer
+            const predictionContainer = document.getElementById("predictionContainer");
+            predictionContainer.innerHTML = `
+                <ul>
+                    <div class="review_container">
+                        Food: ${data.pred_label} | Probability: ${data.pred_prob}
+                    </div>
+                </ul>
+            `;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    });
+</script>
+
+</body>
+</html>
+
