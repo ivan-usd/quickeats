@@ -2,23 +2,26 @@ import io
 from fastapi import FastAPI, Request, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras import layers
 
+favicon_path = "images/icon/food_icon.png"
 
 with open("data/labels.txt", "r") as file:
     food_items_list = file.readlines()
 
 labels = [item.strip() for item in food_items_list]
-
 model = tf.keras.models.load_model("models/mobilenet/model_full_tune")
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates/")
 
+
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse(favicon_path)
 
 @app.get("/")
 async def reviews_form(request: Request):

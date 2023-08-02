@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<!--<link href="../static/styles.css" rel="stylesheet">-->
 <head>
     <meta charset="UTF-8">
     <title>QuickEats</title>
@@ -31,8 +30,9 @@
     <p><img id="output" width="400" /></p>
 </div>
 
+<div id="recipeContainer">
 
-
+</div>
 
 <script>
     // Load Image
@@ -42,8 +42,10 @@
 
 	const predictionContainer = document.getElementById("predictionContainer");
         predictionContainer.innerHTML = "";
-    };
 
+    const recipeContainer = document.getElementById("recipeContainer");
+    recipeContainer.innerHTML = "";
+    };
 
     document.getElementById("uploadForm").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -52,14 +54,12 @@
         const formData = new FormData();
         formData.append("file", fileInput.files[0]);
 
-        // AJAX request to the "/classify" endpoint
         fetch("/classify", {
             method: "POST",
             body: formData,
         })
         .then(response => response.json())
         .then(data => {
-            // Update the prediction results in the predictionContainer
             const predictionContainer = document.getElementById("predictionContainer");
             predictionContainer.innerHTML = `
                 <ul>
@@ -68,6 +68,35 @@
                     </div>
                 </ul>
             `;
+            return fetch('https://api.api-ninjas.com/v1/recipe?query=' + encodeURIComponent(data.pred_label), {
+                headers: { 'X-Api-Key': 'ENTER_KEY_HERE' }
+            });
+        })
+        .then(response => response.json())
+        .then(res => {
+            const recipeContainer = document.getElementById("recipeContainer");
+            recipeContainer.innerHTML = '<ul></ul>';
+
+            for (let i = 0; i < Math.min(3, res.length); i++) {
+                const recipeItem = document.createElement('li');
+                recipeItem.classList.add('review-item');
+                recipeItem.innerHTML = `
+                <div class="review_container">
+                    Title: ${res[i].title}
+                </div>
+                <div class="review_container">
+                    Ingredients: ${res[i].ingredients}
+                </div>
+                <div class="review_container">
+                    Servings: ${res[i].servings}
+                </div>
+                <div class="review_container">
+                    Instructions: ${res[i].instructions}
+                </div>
+            `;
+            const recipeList = recipeContainer.querySelector('ul');
+            recipeList.appendChild(recipeItem);
+            }
         })
         .catch(error => {
             console.error("Error:", error);
