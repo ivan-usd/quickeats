@@ -8,12 +8,12 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras import layers
 
 
-with open("data/food-101/labels.txt", "r") as file:
+with open("data/labels.txt", "r") as file:
     food_items_list = file.readlines()
 
 labels = [item.strip() for item in food_items_list]
 
-model = tf.keras.models.load_model("models/conv/base_model")
+model = tf.keras.models.load_model("models/mobilenet/model_full_tune")
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
