@@ -13,21 +13,7 @@ with open("data/food-101/labels.txt", "r") as file:
 
 labels = [item.strip() for item in food_items_list]
 
-effb0_model = tf.keras.applications.EfficientNetB0(include_top=False)
-effb0_model.trainable = False
-
-inputs = layers.Input(shape=(224, 224, 3), name='input_layer')
-
-x = effb0_model(inputs, training=False)
-x = layers.GlobalAveragePooling2D()(x)
-x = layers.Dense(len(labels))(x)
-outputs = layers.Activation("softmax", dtype=tf.float32, name="softmax_float32")(x)
-
-model = tf.keras.Model(inputs, outputs)
-
-model.compile(loss="categorical_crossentropy", optimizer=tf.keras.optimizers.Adam(), metrics=['Accuracy'])
-
-model.load_weights('models/eff_net/checkpoints/checkpoint.ckpt')
+model = tf.keras.models.load_model("models/conv/base_model")
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
