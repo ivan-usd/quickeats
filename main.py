@@ -15,8 +15,8 @@ labels = [item.strip() for item in food_items_list]
 model = tf.keras.models.load_model("models/mobilenet/model_full_tune")
 
 app = FastAPI()
-app.mount("/static_v2", StaticFiles(directory="static_v2"), name="static_v2")
-templates = Jinja2Templates(directory="templates_v2/")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates/")
 
 
 @app.get('/favicon.ico', include_in_schema=False)
