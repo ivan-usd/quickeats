@@ -9,16 +9,13 @@
 <h1 class="title_container">QuickEats: Food Classifier</h1>
 
 <h2>Details For Use:</h2>
-<p class="description_container">The application analyzes the sentiment of each review, providing insights into its positive or negative nature. Users can gain valuable insights about the reviewed media product by understanding the overall sentiment associated with the reviews. 
-</p>
-
+<p class="description_container">The application analyzes food images via a CNN MobileNet architecture, once an image is uploaded the web application will classify the food image and provide three recipes associated with it.</p>
 
 <form id="uploadForm" method="post" enctype="multipart/form-data">
     <div class="input-row">
         <label class="upload_file" for="img">Upload Food Image</label>
-        <input type="file" id="img" onchange="loadFile(event)"  name="file" accept="image/*" hidden>
+        <input type="file" id="img" onchange="loadFile(event)" name="file" accept="image/*" hidden>
     </div>
-
     <div class="submit-button">
         <button type="submit">Classify</button>
     </div>
@@ -29,22 +26,21 @@
 <div class="img_container">
     <p><img id="output" width="400" /></p>
 </div>
-
 <div id="recipeContainer">
-
+    <!-- The recipe boxes will be dynamically created here -->
 </div>
 
 <script>
     // Load Image
     var loadFile = function(event) {
-	var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
 
-	const predictionContainer = document.getElementById("predictionContainer");
+        const predictionContainer = document.getElementById("predictionContainer");
         predictionContainer.innerHTML = "";
 
-    const recipeContainer = document.getElementById("recipeContainer");
-    recipeContainer.innerHTML = "";
+        const recipeContainer = document.getElementById("recipeContainer");
+        recipeContainer.innerHTML = "";
     };
 
     document.getElementById("uploadForm").addEventListener("submit", function (event) {
@@ -75,35 +71,42 @@
         .then(response => response.json())
         .then(res => {
             const recipeContainer = document.getElementById("recipeContainer");
-            recipeContainer.innerHTML = '<ul></ul>';
+            recipeContainer.innerHTML = "";
 
             for (let i = 0; i < Math.min(3, res.length); i++) {
-                const recipeItem = document.createElement('li');
-                recipeItem.classList.add('review-item');
-                recipeItem.innerHTML = `
-                <div class="review_container">
-                    Title: ${res[i].title}
-                </div>
-                <div class="review_container">
-                    Ingredients: ${res[i].ingredients}
-                </div>
-                <div class="review_container">
-                    Servings: ${res[i].servings}
-                </div>
-                <div class="review_container">
-                    Instructions: ${res[i].instructions}
-                </div>
-            `;
-            const recipeList = recipeContainer.querySelector('ul');
-            recipeList.appendChild(recipeItem);
+                const recipeBox = document.createElement('div');
+                recipeBox.classList.add('recipe-box'); 
+
+                const title = document.createElement('div');
+                title.classList.add('title');
+                title.textContent = `Recipe: ${res[i].title}`;
+
+                const ingredient = document.createElement('div');
+                ingredient.classList.add('content');
+                ingredient.innerHTML = `<span class="label">Ingredients:</span><br>${res[i].ingredients.replace(/\|/g, '<br>')}`;
+
+                const serving = document.createElement('div');
+                serving.classList.add('content');
+                serving.innerHTML = `<span class="label">Servings:</span><br>${res[i].servings}`;
+
+                const instruction = document.createElement('div');
+                instruction.classList.add('content');
+                instruction.innerHTML = `<span class="label">Instructions:</span><br>${res[i].instructions}`;
+
+                recipeBox.appendChild(title);
+                recipeBox.appendChild(ingredient);
+                recipeBox.appendChild(serving);
+                recipeBox.appendChild(instruction);
+
+                recipeContainer.appendChild(recipeBox);
             }
         })
         .catch(error => {
             console.error("Error:", error);
         });
     });
+  
 </script>
 
 </body>
 </html>
-
