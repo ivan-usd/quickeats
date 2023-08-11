@@ -15,6 +15,19 @@ This project is a part of the ADS-599 course in the Applied Data Science Program
 ## Installation
 To use and run this project on your machine, follow these steps: (pending)
 
+### Step 1 Downloading the image data:
+As the dataset too large to upload to GitHub, we suggest following FastAI's download protocol.
+Assuming FastAI has been installed in your Python environment of choice, you can follow these steps:
+1. Import the neccessary packages:
+   from fastai.vision.all import URLs, get_image_files, untar_data
+2. Download the Food-101 dataset:
+   path = untar_data(URLs.FOOD)
+3. Print the path:
+   path.ls()
+   Count the images in path (should be 101,000):
+   files = get_image_files(path/"images")
+   print("Number of Food Images:", len(files))
+
 
 ## Project Intro/Objective
 The main purpose of this project is to leverage machine learning techniques to develop a reliable and convenient solution for food enthusiasts. We aim to build an image recognition system for food integrated with a recipe API, simplifying the process of identifying food and providing accurate recipe recommendations. Our goal is to enhance the culinary experience for users, inspiring them to explore new dishes and flavors easily.
