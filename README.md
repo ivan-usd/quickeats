@@ -21,8 +21,8 @@ Assuming FastAI has been installed in your Python environment of choice, you can
 - Import the neccessary packages: from fastai.vision.all import URLs, get_image_files, untar_data
   
 - Download the Food-101 dataset: path = untar_data(URLs.FOOD)
-- Print the path:path.ls() Count the images in path (should be 101,000): files = get_image_files(path/"images")
-- print("Number of Food Images:", len(files))
+  
+- Print the path:path.ls() Count the images in path (should be 101,000): files = get_image_files(path/"images") print("Number of Food Images:", len(files))
 
 ### 2. Requesting API key to call for recipes in QuickEats app
 (need instruction)
