@@ -38,7 +38,7 @@ An account with API Ninjas is needed in order to obtain the necessary API Key fo
 
    Click **Upload Food Image** button to upload a random food image dowloaded from the internet
 
-   Click the **Classify** button to initiate the analysis
+   Click the **Classify** button to initiate the prediction
    
    The API will process the image and provide the the name of the food, the probability of the predicted class and three corresponding recipes. Below is an axample of the output
    
