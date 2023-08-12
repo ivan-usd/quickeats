@@ -31,7 +31,7 @@ Assuming FastAI has been installed in your Python environment of choice, you can
 
 See ***static*** for the styles and formatting of a web page and ***template*** for html set up. PLease enter the API key acquired ealier in the ***templates.html*** into the part showed in the code snippet below:
 
-![Foodie Solution](images/readme/codesnip.png)
+   <img src="images/readme/codesnip.png" alt="Image Alt Text" width="800"/>
 
 The following steps are neccesary to run the app:
 
@@ -44,16 +44,16 @@ The following steps are neccesary to run the app:
 - Once the server is running, open your web browser and enter the following URL: http://127.0.0.1:8000
    
 - You will be directed to the API application interface as below:
-  
-   ![Foodie Solution](images/readme/interface.png)
-   
-     Click **Upload Food Image** button to upload a random food image dowloaded from the internet
+
+![Foodie Solution](images/readme/interface.png) 
+
+  Click **Upload Food Image** button to upload a random food image dowloaded from the internet
          
-     Click the **Classify** button to initiate the analysis
+  Click the **Classify** button to initiate the analysis
    
-     The API will process the image and provide the the name of the food, the probability of the predicted class and three corresponding recipes. Below is an axample of the output
+  The API will process the image and provide the the name of the food, the probability of the predicted class and three corresponding recipes. Below is an axample of the output
    
-   ![Foodie Solution](images/readme/pancake.png)
+![Foodie Solution](images/readme/pancake.png)
 
 ## Project Intro/Objective
 The main purpose of this project is to leverage machine learning techniques to develop a reliable and convenient solution for food enthusiasts. We aim to build an image recognition system for food integrated with a recipe API, simplifying the process of identifying food and providing accurate recipe recommendations. Our goal is to enhance the culinary experience for users, inspiring them to explore new dishes and flavors easily.
