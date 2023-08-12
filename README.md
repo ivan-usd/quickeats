@@ -56,6 +56,23 @@ Once the user uploads an image, the application will use the trained model to ac
 
 Throughout the project, we anticipate challenges related to data quality, model performance, and the seamless integration of the recipe API. We will address these challenges by iteratively improving the model, optimizing hyperparameters, and fine-tuning the integration process.
 
+
+## Downloading the Food-101 Image Dataset:
+As the dataset too large to upload to GitHub, we suggest following FastAI's download protocol.
+Assuming FastAI has been installed in your Python environment of choice, you can follow these steps:
+1. Import the neccessary packages: <br>
+   from fastai.vision.all import URLs, get_image_files, untar_data
+2. Download the Food-101 dataset: <br>
+   path = untar_data(URLs.FOOD)
+3. Print the path: <br>
+   path.ls()
+   <br>
+   Count the images in path (should be 101,000):
+   <br>
+   files = get_image_files(path/"images")
+   <br>
+   print("Number of Food Images:", len(files))
+
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
