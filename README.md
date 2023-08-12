@@ -18,15 +18,11 @@ To use and run this project on your machine, follow these steps:
 ### 1. Downloading the image data to run the notebooks
 As the dataset too large to upload to GitHub, we suggest following FastAI's download protocol.
 Assuming FastAI has been installed in your Python environment of choice, you can follow these steps:
-- Import the neccessary packages:
-   from fastai.vision.all import URLs, get_image_files, untar_data
-- Download the Food-101 dataset:
-   path = untar_data(URLs.FOOD)
-- Print the path:
-   path.ls()
-   Count the images in path (should be 101,000):
-   files = get_image_files(path/"images")
-   print("Number of Food Images:", len(files))
+- Import the neccessary packages: from fastai.vision.all import URLs, get_image_files, untar_data
+  
+- Download the Food-101 dataset: path = untar_data(URLs.FOOD)
+- Print the path:path.ls() Count the images in path (should be 101,000): files = get_image_files(path/"images")
+- print("Number of Food Images:", len(files))
 
 ### 2. Requesting API key to call for recipes in QuickEats app
 (need instruction)
