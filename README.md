@@ -13,21 +13,25 @@ This project is a part of the ADS-599 course in the Applied Data Science Program
 ## Project Status: Active
 
 ## Installation
-To use and run this project on your machine, follow these steps: (pending)
+To use and run this project locally on your machine, follow these steps after cloning the repository:
 
-### Step 1 Downloading the image data:
-As the dataset too large to upload to GitHub, we suggest following FastAI's download protocol.
-Assuming FastAI has been installed in your Python environment of choice, you can follow these steps:
-1. Import the neccessary packages:
-   from fastai.vision.all import URLs, get_image_files, untar_data
-2. Download the Food-101 dataset:
-   path = untar_data(URLs.FOOD)
-3. Print the path:
-   path.ls()
-   Count the images in path (should be 101,000):
-   files = get_image_files(path/"images")
-   print("Number of Food Images:", len(files))
+### Step 1 Downloading the pretrained model:
+Please download and replace the MobileNet [model_full_tune](models/mobilenet) with the latest mobilenet trained model found [Here](https://drive.google.com/drive/folders/1hBn4oSHoF-_NIgX_vMoFUq7cWmtriQX9?usp=sharing)
 
+### Step 2 Register with API Ninjas
+An account with API Ninjas is needed in order to obtain the necessary API Key for Recipe Generation. Please follow the steps listed below to correctly configure your key. <br>
+1. Create a free account with API Ninjas [Here](https://api-ninjas.com/register)
+2. Once your account is created navigate to your account dashboard and copy your API Key
+3. Finally, inside [index.html](templates/index.html) at line 68 replace the value for X-Api-Key with your API Key
+
+### Step 3 Run the Project
+2. Open a command line interface and navigate to the directory of the cloned repository.
+
+3. Ensure that all dependencies are installed. If not use `pip install -r requirements.txt`
+
+4. Run the following command to start the local server: `uvicorn main:app --reload`
+5. Once the server is running, open your web browser and enter the following URL: http://127.0.0.1:8000
+6. Feel free to upload and classify images as necessary!
 
 ## Project Intro/Objective
 The main purpose of this project is to leverage machine learning techniques to develop a reliable and convenient solution for food enthusiasts. We aim to build an image recognition system for food integrated with a recipe API, simplifying the process of identifying food and providing accurate recipe recommendations. Our goal is to enhance the culinary experience for users, inspiring them to explore new dishes and flavors easily.
