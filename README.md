@@ -42,7 +42,7 @@ An account with API Ninjas is needed in order to obtain the necessary API Key fo
 
    Click the **Classify** button to initiate the prediction
    
-   The API will process the image and provide the the name of the food, the probability of the predicted class and three corresponding recipes. Below is an axample of the output
+   The API will process the image and provide the the name of the food, the probability of the predicted class and three corresponding recipes. Below is an example of the output
    
    ![Foodie Solution](images/readme/pancake.png)
 
